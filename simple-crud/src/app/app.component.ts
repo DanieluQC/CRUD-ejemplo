@@ -27,17 +27,16 @@ export class AppComponent {
       alert('Por favor, complete todos los campos antes de continuar.');
       return;
     }
-    if (this.activeEmployeeId==0) {
-      const newID=this.employeeArray.length>0? this.employeeArray[this.employeeArray.length-1].id+1:1;
-      const newEmployee = {newID, ...this.selectedEmployee};
+    if (this.selectedEmployee.id === 0) {
+      const newID = this.employeeArray.length > 0 ? Math.max(...this.employeeArray.map(emp => emp.id)) + 1 : 1;
+      const newEmployee = { ...this.selectedEmployee, id: newID };
       this.employeeArray.push(newEmployee);
     } else {
       const index = this.employeeArray.findIndex(emp => emp.id === this.selectedEmployee.id);
       this.employeeArray[index] = { ...this.selectedEmployee };
     }
-
+  
     this.resetForm();
-
   }
   
 
