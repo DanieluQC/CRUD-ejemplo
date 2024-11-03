@@ -21,6 +21,8 @@ export class AppComponent {
   title = 'app';
   selectedEmployee = { id:0, name: '', country: '' };
   activeEmployeeId: number | null = null;
+  sortColumn: string = '';
+  sortDirection: 'asc' | 'desc' = 'asc';
 
   addEditEmployee() {
     if (!this.selectedEmployee.name || !this.selectedEmployee.country) {
@@ -54,11 +56,34 @@ export class AppComponent {
     this.employeeArray = this.employeeArray.filter(emp => emp.id !== this.activeEmployeeId);
     this.resetForm();
   }
+
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {
     const targetElement = event.target as HTMLElement;
     if (!targetElement.closest('table') && !targetElement.closest('form')) {
       this.resetForm();
     }
+  }
+
+  sortData(column: string) {
+    if (this.sortColumn === column) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortColumn = column;
+      this.sortDirection = 'asc';
+    }
+
+    this.employeeArray.sort((a, b) => {
+      const aValue = a[column as keyof Employee];
+      const bValue = b[column as keyof Employee];
+
+      if (aValue < bValue) {
+        return this.sortDirection === 'asc' ? -1 : 1;
+      }
+      if (aValue > bValue) {
+        return this.sortDirection === 'asc' ? 1 : -1;
+      }
+      return 0;
+    });
   }
 }

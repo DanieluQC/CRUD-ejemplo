@@ -57,9 +57,63 @@
     <table class="w-full table-auto">
       <thead>
         <tr class="bg-gray-900 text-white">
-          <th class="p-2 text-left">ID</th>
-          <th class="p-2 text-left">Nombre</th>
-          <th class="p-2 text-left">País</th>
+          <th 
+            class="p-2 text-left cursor-pointer transition-all duration-200" 
+            (click)="sortData('id')"
+            [ngClass]="{
+              'hover:bg-purple-700': true,
+              'bg-purple-800': sortColumn === 'id'
+            }"
+            >
+            <div class="flex items-center space-x-1">
+              <span>ID</span>
+              <span class="transition-opacity duration-200"
+                    [ngClass]="{
+                      'opacity-100': sortColumn === 'id',
+                      'opacity-30': sortColumn !== 'id'
+                    }">
+                    {{ sortColumn === 'id' ? (sortDirection === 'asc' ? '▲' : '▼') : '▲' }}
+              </span>
+            </div>
+          </th>
+          <th 
+            class="p-2 text-left cursor-pointer transition-all duration-200" 
+            (click)="sortData('name')"
+            [ngClass]="{
+              'hover:bg-purple-700': true,
+              'bg-purple-800': sortColumn === 'name'
+            }"
+            >
+            <div class="flex items-center space-x-1">
+              <span>Nombre</span>
+              <span class="transition-opacity duration-200"
+                    [ngClass]="{
+                      'opacity-100': sortColumn === 'name',
+                      'opacity-30': sortColumn !== 'name'
+                    }">
+                    {{ sortColumn === 'name' ? (sortDirection === 'asc' ? '▲' : '▼') : '▲' }}
+              </span>
+            </div>
+          </th>
+          <th 
+            class="p-2 text-left cursor-pointer transition-all duration-200" 
+            (click)="sortData('country')"
+            [ngClass]="{
+              'hover:bg-purple-700': true,
+              'bg-purple-800': sortColumn === 'country'
+            }"
+            >
+            <div class="flex items-center space-x-1">
+              <span>País</span>
+              <span class="transition-opacity duration-200"
+                    [ngClass]="{
+                      'opacity-100': sortColumn === 'country',
+                      'opacity-30': sortColumn !== 'country'
+                    }">
+                    {{ sortColumn === 'country' ? (sortDirection === 'asc' ? '▲' : '▼') : '▲' }}
+              </span>
+            </div>
+          </th>
         </tr>
       </thead>
       <tbody>
