@@ -1,0 +1,85 @@
+<div class="fondo mt-0 p-4 bg-gradient-to-br from-purple-600 to-red-500 text-white shadow-lg">
+  <h1 class="text-center italic text-3xl font-bold mb-6">CRUD Angular Tailwind</h1>
+
+  <div class="bg-gray-900 p-6 rounded-lg shadow-md text-white">
+    <h2 class="text-xl font-semibold mb-4">Inserta un nuevo Empleado</h2>
+    
+    <form (ngSubmit)="addEditEmployee()" class="space-y-4">
+      
+      <div>
+        <label for="name" class="block text-sm font-medium text-white">Nombre</label>
+        <input
+          type="text"
+          id="name"
+          [(ngModel)]="selectedEmployee.name"
+          name="name"
+          class="mt-1 p-2 border border-gray-300 rounded-md w-full focus:ring-purple-500 focus:border-purple-500 text-gray-900"
+          placeholder="Ingrese el nombre del empleado"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="country" class="block text-sm font-medium text-white">País</label>
+        <input
+          type="text"
+          id="country"
+          [(ngModel)]="selectedEmployee.country"
+          name="country"
+          class="mt-1 p-2 border border-gray-300 rounded-md w-full focus:ring-purple-500 focus:border-purple-500 text-gray-900"
+          placeholder="Ingrese el país de origen"
+          required
+        />
+      </div>
+
+      <div class="flex space-x-2">
+        <button
+          type="submit"
+          class="flex-1 py-2 px-4 bg-purple-700 hover:bg-purple-800 text-white rounded-md font-semibold shadow-lg transition duration-200"
+        >
+          Submit
+        </button>
+        
+        <button
+          *ngIf="activeEmployeeId"
+          type="button"
+          (click)="deleteEmployee()"
+          class="flex-1 py-2 px-4 bg-red-600 hover:bg-red-700 text-white rounded-md font-semibold shadow-lg transition duration-200"
+        >
+          Eliminar
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="mt-8 bg-gray-800 p-4 rounded-lg shadow-md text-white">
+    <h2 class="text-xl font-semibold mb-4">Lista de Empleados</h2>
+    <table class="w-full table-auto">
+      <thead>
+        <tr class="bg-gray-900 text-white">
+          <th class="p-2 text-left">ID</th>
+          <th class="p-2 text-left">Nombre</th>
+          <th class="p-2 text-left">País</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let emp of employeeArray"
+          (click)="openForEdit(emp)"
+          [ngClass]="{
+            'bg-purple-200 text-purple-900': emp.id === activeEmployeeId,
+            'bg-gray-700 hover:bg-purple-600': emp.id !== activeEmployeeId
+          }"
+          class="cursor-pointer transition duration-200"
+        >
+          <td class="p-2">{{ emp.id }}</td>
+          <td class="p-2">{{ emp.name }}</td>
+          <td class="p-2">{{ emp.country }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    
+</div>
+
+<router-outlet />
