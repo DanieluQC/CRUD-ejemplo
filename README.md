@@ -25,7 +25,7 @@ Este proyecto es una aplicación CRUD (Crear, Leer, Actualizar, Eliminar) simple
 1. Clona este repositorio:
 
 ```
-git clone https://github.com/[TU_NOMBRE_DE_USUARIO]/crud-empleados-angular.git
+git clone https://github.com/DanieluQC/CRUD-ejemplo.git
 ```
 
 2. Navega al directorio del proyecto:
